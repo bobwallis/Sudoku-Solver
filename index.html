@@ -1,82 +1,122 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title>bobwallis/Sudoku-Solver @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #F60;
-		  font-family: "Helvetica,Arial,FreeSans"; 
-  		color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #0099ff; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #0099ff; }
-    h3 { text-align: center; color: #0099ff; }
-    a { color: #0099ff; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
-</head>
-
-<body>
-  <a href="http://github.com/bobwallis/Sudoku-Solver"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-  
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/bobwallis/Sudoku-Solver/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/bobwallis/Sudoku-Solver/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-      
-    <h1><a href="http://github.com/bobwallis/Sudoku-Solver">Sudoku-Solver</a> 
-      <span class="small">by <a href="http://github.com/bobwallis">bobwallis</a></span></h1>
-
-    <div class="description">
-      A Javascript sudoku solver
-    </div>
-
-    <h2>License</h2>
-<p>MIT</p>
-<h2>Authors</h2>
-<p>Bob Wallis (bob.wallis@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Bob Wallis (bob.wallis@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/bobwallis/Sudoku-Solver/zipball/master">zip</a> or
-      <a href="http://github.com/bobwallis/Sudoku-Solver/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/bobwallis/Sudoku-Solver</pre>
-    </p>
-      
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/bobwallis/Sudoku-Solver">bobwallis/Sudoku-Solver</a>
-    </div>
-    
-  </div>
-
-  
-</body>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="A simple sudoku solver, written in Javascript" />
+		<title>Sudoku Solver</title>
+		<link rel="stylesheet" media="screen, projection" href="style.min.css" />
+		<script src="sudoku.min.js"></script>
+		<script src="scripts.min.js"></script>
+	</head>
+	<body>
+		<h1>Sudoku Solver</h1>
+		<noscript>This won't work without Javascript enabled</noscript>
+		<form id="sudokuForm">
+			<table id="input">
+				<tr>
+					<td><input type="text" maxlength="1" id="input_0_0"/></td>
+					<td><input type="text" maxlength="1" id="input_0_1"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_0_2"/></td>
+					<td><input type="text" maxlength="1" id="input_0_3"/></td>
+					<td><input type="text" maxlength="1" id="input_0_4"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_0_5"/></td>
+					<td><input type="text" maxlength="1" id="input_0_6"/></td>
+					<td><input type="text" maxlength="1" id="input_0_7"/></td>
+					<td><input type="text" maxlength="1" id="input_0_8"/></td>
+				</tr>
+				<tr>
+					<td><input type="text" maxlength="1" id="input_1_0"/></td>
+					<td><input type="text" maxlength="1" id="input_1_1"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_1_2"/></td>
+					<td><input type="text" maxlength="1" id="input_1_3"/></td>
+					<td><input type="text" maxlength="1" id="input_1_4"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_1_5"/></td>
+					<td><input type="text" maxlength="1" id="input_1_6"/></td>
+					<td><input type="text" maxlength="1" id="input_1_7"/></td>
+					<td><input type="text" maxlength="1" id="input_1_8"/></td>
+				</tr>
+				<tr>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_2_0"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_2_1"/></td>
+					<td class="borderRight borderBottom"><input type="text" maxlength="1" id="input_2_2"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_2_3"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_2_4"/></td>
+					<td class="borderRight borderBottom"><input type="text" maxlength="1" id="input_2_5"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_2_6"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_2_7"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_2_8"/></td>
+				</tr>
+				<tr>
+					<td><input type="text" maxlength="1" id="input_3_0"/></td>
+					<td><input type="text" maxlength="1" id="input_3_1"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_3_2"/></td>
+					<td><input type="text" maxlength="1" id="input_3_3"/></td>
+					<td><input type="text" maxlength="1" id="input_3_4"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_3_5"/></td>
+					<td><input type="text" maxlength="1" id="input_3_6"/></td>
+					<td><input type="text" maxlength="1" id="input_3_7"/></td>
+					<td><input type="text" maxlength="1" id="input_3_8"/></td>
+				</tr>
+				<tr>
+					<td><input type="text" maxlength="1" id="input_4_0"/></td>
+					<td><input type="text" maxlength="1" id="input_4_1"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_4_2"/></td>
+					<td><input type="text" maxlength="1" id="input_4_3"/></td>
+					<td><input type="text" maxlength="1" id="input_4_4"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_4_5"/></td>
+					<td><input type="text" maxlength="1" id="input_4_6"/></td>
+					<td><input type="text" maxlength="1" id="input_4_7"/></td>
+					<td><input type="text" maxlength="1" id="input_4_8"/></td>
+				</tr>
+				<tr>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_5_0"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_5_1"/></td>
+					<td class="borderRight borderBottom"><input type="text" maxlength="1" id="input_5_2"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_5_3"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_5_4"/></td>
+					<td class="borderRight borderBottom"><input type="text" maxlength="1" id="input_5_5"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_5_6"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_5_7"/></td>
+					<td class="borderBottom"><input type="text" maxlength="1" id="input_5_8"/></td>
+				</tr>
+				<tr>
+					<td><input type="text" maxlength="1" id="input_6_0"/></td>
+					<td><input type="text" maxlength="1" id="input_6_1"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_6_2"/></td>
+					<td><input type="text" maxlength="1" id="input_6_3"/></td>
+					<td><input type="text" maxlength="1" id="input_6_4"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_6_5"/></td>
+					<td><input type="text" maxlength="1" id="input_6_6"/></td>
+					<td><input type="text" maxlength="1" id="input_6_7"/></td>
+					<td><input type="text" maxlength="1" id="input_6_8"/></td>
+				</tr>
+				<tr>
+					<td><input type="text" maxlength="1" id="input_7_0"/></td>
+					<td><input type="text" maxlength="1" id="input_7_1"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_7_2"/></td>
+					<td><input type="text" maxlength="1" id="input_7_3"/></td>
+					<td><input type="text" maxlength="1" id="input_7_4"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_7_5"/></td>
+					<td><input type="text" maxlength="1" id="input_7_6"/></td>
+					<td><input type="text" maxlength="1" id="input_7_7"/></td>
+					<td><input type="text" maxlength="1" id="input_7_8"/></td>
+				</tr>
+				<tr>
+					<td><input type="text" maxlength="1" id="input_8_0"/></td>
+					<td><input type="text" maxlength="1" id="input_8_1"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_8_2"/></td>
+					<td><input type="text" maxlength="1" id="input_8_3"/></td>
+					<td><input type="text" maxlength="1" id="input_8_4"/></td>
+					<td class="borderRight"><input type="text" maxlength="1" id="input_8_5"/></td>
+					<td><input type="text" maxlength="1" id="input_8_6"/></td>
+					<td><input type="text" maxlength="1" id="input_8_7"/></td>
+					<td><input type="text" maxlength="1" id="input_8_8"/></td>
+				</tr>
+			</table>
+			<div id="submitButtons">
+				<input id="solveButton" type="button" value="Solve" />
+				<input id="clearButton" type="reset" value="Clear" />
+			</div>
+		</form>
+	</body>
 </html>
