@@ -17,7 +17,7 @@ var sudokuPage = {
 		// Puts the 'values' array into the page's grid
 		for( i = 0, iLim = values.length; i < iLim; ++i ) {
 			for( j = 0, jLim = values[i].length; j < jLim; ++j ) {
-				this.replaceGridValue( i, j, values[i][j] );
+				sudokuPage.replaceGridValue( i, j, values[i][j] );
 			}
 		}
 	},
@@ -40,7 +40,7 @@ var sudokuPage = {
 		// Checks every input
 		var inputs = document.getElementById( 'input' ).getElementsByTagName( 'input' ), i, iLim;
 		for( i = 0, iLim = inputs.length; i < iLim; ++i ) {
-			this.validateValue( inputs[i] );
+			sudokuPage.validateValue( inputs[i] );
 		}
 		if( getElementsByClassName( document.getElementById( 'input' ), 'error' ).length === 0 ) {
 			return true;
@@ -55,8 +55,8 @@ var sudokuPage = {
 			return false;
 		}
 		// Begin the solve process
-		this.sudoku = new Sudoku( sudokuPage.fetchGrid(), sudokuPage.replaceGridValue, function( done ) { if( done === false ) { alert( 'Got stuck, possibly impossible.' ); } } );
-		this.sudoku.solve();
+		sudokuPage.sudoku = new Sudoku( sudokuPage.fetchGrid(), sudokuPage.replaceGridValue, function( done ) { if( done === false ) { alert( 'Got stuck, possibly impossible.' ); } } );
+		sudokuPage.sudoku.solve();
 	}
 };
 
