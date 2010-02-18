@@ -26,6 +26,10 @@
  * @author Robert Wallis <bob.wallis@gmail.com>
  */
 
+/**
+ * A sudoku.
+ * @constructor
+ */
 var Sudoku = function( values/*, valueCallback, completeCallback*/ ) {
 	// values should be a 9x9 array of integers 1 to 9 in places where a value is known, and null otherwise
 	// valueCallback should be function f(i,j,value) called when value is found to be in position [i][j], or null
