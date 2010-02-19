@@ -42,23 +42,27 @@ var Sudoku = function( values/*, valueCallback, completeCallback*/ ) {
 
 Sudoku.prototype = {
 	initialise: function() {
-		var i, j, k, valueIJ;
+		var i = 9, j, k, valueIJ;
 		// Initialise this.tf with 'true' values, this.output with 'null' values
 		this.output = []; this.tf = [];
-		for( i = 0; i < 9; ++i ) {
+		while( i-- ) {
 			this.tf[i] = [];
 			this.output[i] = [];
-			for( j = 0; j < 9; ++j ) {
+			j = 9;
+			while( j-- ) {
 				this.tf[i][j] = [];
 				this.output[i][j] = null;
-				for( k = 0; k < 9; ++k ) {
+				k = 9;
+				while( k-- ) {
 					this.tf[i][j][k] = true;
 				}
 			}
 		}
 		// And feed in the input values
-		for( i = 0; i < 9; ++i ) { 
-			for( j = 0; j < 9; ++j ) {
+		i = 9;
+		while( i-- ) { 
+			j = 9;
+			while( j-- ) {
 				valueIJ = parseInt( this.input[i][j], 10 );
 				if( !isNaN( valueIJ ) ) {
 					this.setValue( i, j, valueIJ-1, false );
@@ -87,12 +91,14 @@ Sudoku.prototype = {
 		this.completeCallback( false ); 	return false;
 	},
 	basicCandidateElimination: function() {
-		var i, j, k, br, bc, foundVal, foundValPos, foundRow, foundRowPos, foundCol, foundColPos, foundBlock, foundBlockPos;
+		var i = 9, iLim, j, jLim, k, br = 3, bc, foundVal, foundValPos, foundRow, foundRowPos, foundCol, foundColPos, foundBlock, foundBlockPos;
 		// First find all rows and columns where a value claims a cell
-		for( i = 0; i < 9; ++i ) {
-			for( j = 0; j < 9; ++j ) {
-				foundVal = 0; foundValPos = []; foundRow = 0; foundRowPos = []; foundCol = 0; foundColPos = [];
-				for( k = 0; k < 9; k++ ) {
+		while( i-- ) {
+			j = 9;
+			while( j-- ) {
+				foundVal = foundRow = foundCol = 0; foundValPos = foundRowPos = foundColPos = [];
+				k = 9;
+				while( k-- ) {
 					if( this.output[i][j] === null && this.tf[i][j][k] === true ) { ++foundVal; foundValPos = [i,j,k]; }
 					if( this.output[i][k] === null && this.tf[i][k][j] === true ) { ++foundRow; foundRowPos = [i,k,j]; }
 					if( this.output[k][i] === null && this.tf[k][i][j] === true ) { ++foundCol; foundColPos = [k,i,j]; }
@@ -107,12 +113,14 @@ Sudoku.prototype = {
 			}
 		}
 		// Find 3x3 blocks where a value claims a cell
-		for( br = 0; br < 3; ++br ) { // Loop over all 9 3x3 blocks
-			for( bc = 0; bc < 3; ++bc ) {
-				for( k = 0; k < 9; ++k ) { // Loop over all possible values
+		while( br-- ) { // Loop over all 9 3x3 blocks
+			bc = 3;
+			while( bc-- ) {
+				k = 9;
+				while( k-- ) { // Loop over all possible values
 					foundBlock = 0; foundBlockPos = [];
-					for( i = 3*br; i < 3*(br+1); ++i ) { // Loop over all cells within the block
-						for( j = 3*bc; j < 3*(bc+1); ++j ) {
+					for( i = 3*br, iLim = 3*(br+1); i < iLim; ++i ) { // Loop over all cells within the block
+						for( j = 3*bc, jLim = 3*(bc+1); j < jLim; ++j ) {
 							if( this.output[i][j] === null && this.tf[i][j][k] === true ) { ++foundBlock; foundBlockPos = [i,j,k]; }
 						}
 					}
@@ -127,35 +135,41 @@ Sudoku.prototype = {
 	},
 	backtrack: function() {
 		// Find the cell with the fewest options
-		var optionCount = 10, cell = [], possibilities = [], ijPossCount, i, j, k, x, guess;
-		for( i = 0; i < 9; ++i ) { 
-			for( j = 0; j < 9; ++j ) {
+		var optionCount = 10, cell = [], possibilities = [], ijPossCount, i = 9, j, k, x, guess;
+		while( i-- ) { 
+			j = 9;
+			while( j-- ) {
 				ijPossCount = 0;
-				for( k = 0; k < 9; ++k ) {
+				k = 9;
+				while( k-- ) {
 					if( this.tf[i][j][k] === true ) { ++ijPossCount; }
 				}
 				if( ijPossCount < optionCount && ijPossCount > 1 ) {
 					optionCount = ijPossCount;
 					cell[0] = i; cell[1] = j;
 				}
-				if( optionCount == 2 ) { break; }
+				if( optionCount == 2 ) { break; } // We know 2 will be the fewest
 			}
-			if( optionCount == 2 ) { break; }
+			if( optionCount == 2 ) { break; } // We know 2 will be the fewest
 		}
 		// And note the possible values for it
-		for( k = 0; k < 9; ++k ) {
+		k = 9;
+		while( k-- ) {
 			if( this.tf[cell[0]][cell[1]][k] === true ) { possibilities.push( k ); }
 		}
 		// For each possibility...
-		for( x = 0, xLim = possibilities.length; x < xLim; ++x ) {
+		x = possibilities.length;
+		while( x-- ) {
 			guess = new Sudoku( this.output ); // Create a new sudoku with the same values as the current one
 			guess.initialise();
 			guess.setValue( cell[0], cell[1], possibilities[x], false ); // Insert our guess
 			// Try to solve the new sudoku
 			if( guess.solve() ) {
 				// If it solves then copy the solution values into this sudoku
-				for( i = 0; i < 9; ++i ) { 
-					for( j = 0; j < 9; ++j ) {
+				i = 9;
+				while( i-- ) { 
+					j = 9;
+					while( j-- ) {
 						if( this.output[i][j] === null ) { this.setValue( i, j, guess.output[i][j]-1 ); }
 					}
 				}
@@ -164,14 +178,12 @@ Sudoku.prototype = {
 		}
 	},
 	setValue: function( i, j, value, doCallback ) { // Note values run from 0 to 8, not 1 to 9
-		var x, y, xLim, yLim;
+		var x = 9, xLim, y, yLim;
 		if( typeof( doCallback ) == 'undefined' ) { doCallback = true; }
 		this.output[i][j] = value+1;
 		// Remove the value from cells in the same row and column, and other values from the cell
-		for( x = 0; x < 9; ++x ) {
-			this.tf[x][j][value] = false;
-			this.tf[i][x][value] = false;
-			this.tf[i][j][x] = false;
+		while( x-- ) {
+			this.tf[x][j][value] = this.tf[i][x][value] = this.tf[i][j][x] = false;
 		}
 		// Remove the value from cells in the same 3x3 block
 		xLim = i-(i%3)+3; yLim = j-(j%3)+3;
@@ -186,27 +198,28 @@ Sudoku.prototype = {
 		if( doCallback === true ) { this.valueCallback( i, j, value+1 ); }
 	},
 	solved: function() {
-		var i, j;
+		var i = 9, j;
 		// Check if every cell in this.output contains a non-null value
-		for( i = 0; i < 9; ++i ) {
-			for( j = 0; j < 9; ++j ) {
-				if( this.output[i][j] === null ) {
-					return false;
-				}
+		while( i-- ) {
+			j = 9;
+			while( j-- ) {
+				if( this.output[i][j] === null ) { return false; 	}
 			}
 		}
 		return true;
 	},
 	impossible: function() {
-		var i, j, k, possibleValues;
+		var i = 9, j, k, possibleValues;
 		// Check that every cell has at least one possible value
-		for( i = 0; i < 9; ++i ) {
-			for( j = 0; j < 9; ++j ) {
+		while( i-- ) {
+			j = 9;
+			while( j-- ) {
 				possibleValues = false;
-				for( k = 0; k < 9; ++k ) {
+				k = 9;
+				while( k-- ) {
 					if( this.tf[i][j][k] === true ) { possibleValues = true; break; }
 				}
-				if( ! possibleValues ) { return true; }
+				if( !possibleValues ) { return true; }
 			}
 		}
 		return false;

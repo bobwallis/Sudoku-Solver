@@ -2,10 +2,11 @@
 var sudokuPage = {
 	fetchGrid: function() {
 		// Read the input values and put into a 9x9 array, use parseInt to make sure we have integers
-		var values = [], i, j, inputValIJ;
-		for( i = 0; i < 9; ++i ) {
+		var values = [], i = 9, j, inputValIJ;
+		while( i-- ) {
 			values[i] = [];
-			for( j = 0; j < 9; ++j ) {
+			j = 9;
+			while( j-- ) {
 				inputValIJ = parseInt( document.getElementById( 'input_'+i+'_'+j ).value, 10 );
 				values[i][j] = ( isNaN( inputValIJ ) )? null : inputValIJ;
 			}
@@ -13,50 +14,56 @@ var sudokuPage = {
 		return values;
 	},
 	replaceGrid: function( values ) {
-		var i, j, iLim, jLim;
+		var i=values.length, j;
 		// Puts the 'values' array into the page's grid
-		for( i = 0, iLim = values.length; i < iLim; ++i ) {
-			for( j = 0, jLim = values[i].length; j < jLim; ++j ) {
+		while( i-- ) {
+			j = values[i].length;
+			while( j-- ) {
 				sudokuPage.replaceGridValue( i, j, values[i][j] );
 			}
 		}
 	},
 	replaceGridValue: function( i, j, value ) {
 		// Puts a single 'value' into position [i][j] in the page's grid, leaving blank if the value is null
-		var inputIJ = document.getElementById( 'input_'+i+'_'+j );
 		if( value !== null ) {
-			inputIJ.value = value;
+			document.getElementById( 'input_'+i+'_'+j ).value = value;
 		}
 	},
 	validateValue: function( input ) {
 		// Checks whether the value of an input is valid
 		if( input.value != '' && [1,2,3,4,5,6,7,8,9].contains( parseInt( input.value, 10 ) ) === false ) {
 			input.className= 'error'; // Set the class of invalid inputs to 'error'
-		} else {
+		}
+		else {
 			input.className= ''; // Clear the class of valid inputs
 		}
 	},
 	validateGrid: function() {
 		// Checks every input
-		var inputs = document.getElementById( 'input' ).getElementsByTagName( 'input' ), i, iLim;
-		for( i = 0, iLim = inputs.length; i < iLim; ++i ) {
-			sudokuPage.validateValue( inputs[i] );
-		}
+		var inputs = document.getElementById( 'input' ).getElementsByTagName( 'input' ), i=inputs.length;
+		while( i-- ) { sudokuPage.validateValue( inputs[i] ); }
 		if( getElementsByClassName( document.getElementById( 'input' ), 'error' ).length === 0 ) {
 			return true;
-		} else {
-			return false;
 		}
+		else { return false; }
 	},
 	solve: function() {
+	sudokuPage.startTimer();
 		// First check input is valid
 		if( ! sudokuPage.validateGrid() ) {
 			alert( 'Check input' );
 			return false;
 		}
 		// Begin the solve process
-		sudokuPage.sudoku = new Sudoku( sudokuPage.fetchGrid(), sudokuPage.replaceGridValue, function( done ) { if( done === false ) { alert( 'Got stuck, possibly impossible.' ); } } );
+		sudokuPage.sudoku = new Sudoku( sudokuPage.fetchGrid(), sudokuPage.replaceGridValue, function( done ) { if( done === false ) { alert( 'Got stuck, possibly impossible.' ); } sudokuPage.endTimer(); } );
 		sudokuPage.sudoku.solve();
+	},
+	startTimer: function() {
+		sudokuPage.startTime = (new Date()).getTime();
+	},
+	endTimer: function() {
+		var time = ((new Date()).getTime()) - sudokuPage.startTime;
+		document.getElementById( 'timer' ).innerHTML = 'Solved in '+time+'ms';
 	}
 };
 
@@ -66,7 +73,8 @@ var sudokuPage = {
 	// Using this will break for..each, so doing this another way would be more portable
 	if( typeof Array.prototype.contains == 'undefined' ) {
 		Array.prototype.contains = function( e ) {
-			for( var i = 0, iLim = this.length; i < iLim; i++ ) {
+			var i = this.length;
+			while( i-- ) {
 				if( this[i] === e ) { return true; }
 			}
 			return false;
