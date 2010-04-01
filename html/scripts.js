@@ -104,11 +104,14 @@ var sudokuPage = {
 	// Page load event
 	window.addEventListener( 'load', function() {
 		try {
+			// Add event listener to the solve button
+			document.getElementById( 'solveButton' ).addEventListener( 'click', function( e ) { sudokuPage.solve(); return true; }, false );
 			// Listen for changes to input fields, and validate the input as we go
 			document.getElementById( 'sudokuForm' ).addEventListener( 'blur', function( e ) { if( !['button','reset'].contains( e.target.type ) ) { sudokuPage.validateValue( e.target ); } }, true );
 		} catch(e) {
 			if( typeof window.attachEvent != 'undefined' ) {
 				// Attatch events using Microsoft's method
+				document.getElementById( 'solveButton' ).attachEvent( 'onclick', function( e ) { sudokuPage.solve(); return true; } );
 				document.getElementById( 'sudokuForm' ).attachEvent( 'onblur', function( e ) { if( !['button','reset'].contains( e.target.type ) ) { sudokuPage.validateValue( e.target ); } } );
 			}
 		}
