@@ -4,117 +4,116 @@
 		<meta charset="utf-8" />
 		<meta name="description" content="A simple sudoku solver, written in Javascript" />
 		<title>Sudoku Solver</title>
-		<style>body{background-color:#FFF;color:#000;text-align:center;}h1{font-size:15px;font-weight:bold;margin-bottom:5px;}table{border-collapse:collapse;margin:0 auto 5px auto;}table td{padding:3px;}.borderRight{border-right:1px solid #999;}.borderBottom{border-bottom:1px solid #999;}table#input input{width:18px;height:18px;padding:.2px 0;text-align:center;border:1px solid #DDD;font-family:monospace;}table#input input:focus{border-color:#999;}input.error{border:1px solid #F00!important;}div#submitButtons input,div#solving input{margin:5px;}div#footer p{font-size:10px;}</style>
 		<script src="compiled.js"></script>
+		<style>body{background-color:#FFF;color:#000;text-align:center;}h1{font-size:15px;font-weight:bold;margin-bottom:5px;}table{border-collapse:collapse;margin:0 auto 5px auto;}table td{padding:3px;}.borderRight{border-right:1px solid #999;}.borderBottom{border-bottom:1px solid #999;}table#input input{width:18px;height:18px;padding:.2px 0;text-align:center;border:1px solid #DDD;font-family:monospace;}table#input input:focus{border-color:#999;}input.error{border:1px solid #F00!important;}div#submitButtons input,div#solving input{margin:5px;}div#footer p{font-size:10px;}</style>
 	</head>
 	<body>
-		<a href="http://github.com/bobwallis/Sudoku-Solver"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 		<h1>Sudoku Solver</h1>
 		<noscript>This won't work without Javascript enabled</noscript>
 		<form id="sudokuForm">
 			<table id="input">
 				<tr>
-					<td><input type="number" maxlength="1" id="input_0_0"/></td>
-					<td><input type="number" maxlength="1" id="input_0_1"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_0_2"/></td>
-					<td><input type="number" maxlength="1" id="input_0_3"/></td>
-					<td><input type="number" maxlength="1" id="input_0_4"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_0_5"/></td>
-					<td><input type="number" maxlength="1" id="input_0_6"/></td>
-					<td><input type="number" maxlength="1" id="input_0_7"/></td>
-					<td><input type="number" maxlength="1" id="input_0_8"/></td>
+					<td><input type="number" maxlength="1" id="input_0_0" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_0_1" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_0_2" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_0_3" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_0_4" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_0_5" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_0_6" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_0_7" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_0_8" onclick="this.select();"></td>
 				</tr>
 				<tr>
-					<td><input type="number" maxlength="1" id="input_1_0"/></td>
-					<td><input type="number" maxlength="1" id="input_1_1"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_1_2"/></td>
-					<td><input type="number" maxlength="1" id="input_1_3"/></td>
-					<td><input type="number" maxlength="1" id="input_1_4"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_1_5"/></td>
-					<td><input type="number" maxlength="1" id="input_1_6"/></td>
-					<td><input type="number" maxlength="1" id="input_1_7"/></td>
-					<td><input type="number" maxlength="1" id="input_1_8"/></td>
+					<td><input type="number" maxlength="1" id="input_1_0" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_1_1" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_1_2" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_1_3" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_1_4" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_1_5" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_1_6" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_1_7" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_1_8" onclick="this.select();"></td>
 				</tr>
 				<tr>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_0"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_1"/></td>
-					<td class="borderRight borderBottom"><input type="number" maxlength="1" id="input_2_2"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_3"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_4"/></td>
-					<td class="borderRight borderBottom"><input type="number" maxlength="1" id="input_2_5"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_6"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_7"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_8"/></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_0" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_1" onclick="this.select();"></td>
+					<td class="borderRight borderBottom"><input type="number" maxlength="1" id="input_2_2" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_3" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_4" onclick="this.select();"></td>
+					<td class="borderRight borderBottom"><input type="number" maxlength="1" id="input_2_5" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_6" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_7" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_2_8" onclick="this.select();"></td>
 				</tr>
 				<tr>
-					<td><input type="number" maxlength="1" id="input_3_0"/></td>
-					<td><input type="number" maxlength="1" id="input_3_1"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_3_2"/></td>
-					<td><input type="number" maxlength="1" id="input_3_3"/></td>
-					<td><input type="number" maxlength="1" id="input_3_4"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_3_5"/></td>
-					<td><input type="number" maxlength="1" id="input_3_6"/></td>
-					<td><input type="number" maxlength="1" id="input_3_7"/></td>
-					<td><input type="number" maxlength="1" id="input_3_8"/></td>
+					<td><input type="number" maxlength="1" id="input_3_0" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_3_1" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_3_2" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_3_3" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_3_4" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_3_5" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_3_6" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_3_7" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_3_8" onclick="this.select();"></td>
 				</tr>
 				<tr>
-					<td><input type="number" maxlength="1" id="input_4_0"/></td>
-					<td><input type="number" maxlength="1" id="input_4_1"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_4_2"/></td>
-					<td><input type="number" maxlength="1" id="input_4_3"/></td>
-					<td><input type="number" maxlength="1" id="input_4_4"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_4_5"/></td>
-					<td><input type="number" maxlength="1" id="input_4_6"/></td>
-					<td><input type="number" maxlength="1" id="input_4_7"/></td>
-					<td><input type="number" maxlength="1" id="input_4_8"/></td>
+					<td><input type="number" maxlength="1" id="input_4_0" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_4_1" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_4_2" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_4_3" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_4_4" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_4_5" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_4_6" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_4_7" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_4_8" onclick="this.select();"></td>
 				</tr>
 				<tr>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_0"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_1"/></td>
-					<td class="borderRight borderBottom"><input type="number" maxlength="1" id="input_5_2"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_3"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_4"/></td>
-					<td class="borderRight borderBottom"><input type="number" maxlength="1" id="input_5_5"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_6"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_7"/></td>
-					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_8"/></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_0" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_1" onclick="this.select();"></td>
+					<td class="borderRight borderBottom"><input type="number" maxlength="1" id="input_5_2" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_3" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_4" onclick="this.select();"></td>
+					<td class="borderRight borderBottom"><input type="number" maxlength="1" id="input_5_5" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_6" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_7" onclick="this.select();"></td>
+					<td class="borderBottom"><input type="number" maxlength="1" id="input_5_8" onclick="this.select();"></td>
 				</tr>
 				<tr>
-					<td><input type="number" maxlength="1" id="input_6_0"/></td>
-					<td><input type="number" maxlength="1" id="input_6_1"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_6_2"/></td>
-					<td><input type="number" maxlength="1" id="input_6_3"/></td>
-					<td><input type="number" maxlength="1" id="input_6_4"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_6_5"/></td>
-					<td><input type="number" maxlength="1" id="input_6_6"/></td>
-					<td><input type="number" maxlength="1" id="input_6_7"/></td>
-					<td><input type="number" maxlength="1" id="input_6_8"/></td>
+					<td><input type="number" maxlength="1" id="input_6_0" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_6_1" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_6_2" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_6_3" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_6_4" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_6_5" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_6_6" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_6_7" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_6_8" onclick="this.select();"></td>
 				</tr>
 				<tr>
-					<td><input type="number" maxlength="1" id="input_7_0"/></td>
-					<td><input type="number" maxlength="1" id="input_7_1"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_7_2"/></td>
-					<td><input type="number" maxlength="1" id="input_7_3"/></td>
-					<td><input type="number" maxlength="1" id="input_7_4"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_7_5"/></td>
-					<td><input type="number" maxlength="1" id="input_7_6"/></td>
-					<td><input type="number" maxlength="1" id="input_7_7"/></td>
-					<td><input type="number" maxlength="1" id="input_7_8"/></td>
+					<td><input type="number" maxlength="1" id="input_7_0" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_7_1" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_7_2" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_7_3" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_7_4" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_7_5" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_7_6" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_7_7" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_7_8" onclick="this.select();"></td>
 				</tr>
 				<tr>
-					<td><input type="number" maxlength="1" id="input_8_0"/></td>
-					<td><input type="number" maxlength="1" id="input_8_1"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_8_2"/></td>
-					<td><input type="number" maxlength="1" id="input_8_3"/></td>
-					<td><input type="number" maxlength="1" id="input_8_4"/></td>
-					<td class="borderRight"><input type="number" maxlength="1" id="input_8_5"/></td>
-					<td><input type="number" maxlength="1" id="input_8_6"/></td>
-					<td><input type="number" maxlength="1" id="input_8_7"/></td>
-					<td><input type="number" maxlength="1" id="input_8_8"/></td>
+					<td><input type="number" maxlength="1" id="input_8_0" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_8_1" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_8_2" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_8_3" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_8_4" onclick="this.select();"></td>
+					<td class="borderRight"><input type="number" maxlength="1" id="input_8_5" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_8_6" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_8_7" onclick="this.select();"></td>
+					<td><input type="number" maxlength="1" id="input_8_8" onclick="this.select();"></td>
 				</tr>
 			</table>
 			<div id="submitButtons">
-				<input id="solveButton" type="button" value="Solve" />
+				<input id="solveButton" type="button" value="Solve">
 				<input id="clearButton" type="reset" value="Clear" />
 			</div>
 			<p id="timer"></p>
