@@ -44,10 +44,9 @@ Sudoku.prototype = {
 	initialise: function() {
 		var i = 9, j, k, valueIJ;
 		// Initialise this.tf with 'true' values, this.output with 'null' values
-		this.output = []; this.tf = [];
+		this.output = this.tf = [];
 		while( i-- ) {
-			this.tf[i] = [];
-			this.output[i] = [];
+			this.tf[i] = this.output[i] = [];
 			j = 9;
 			while( j-- ) {
 				this.tf[i][j] = [];
@@ -80,13 +79,13 @@ Sudoku.prototype = {
 		// Perform 'human' solving techniques
 		this.basicCandidateElimination();
 		
-		if( this.solved() ) { 	this.completeCallback( true ); return true; }
-		if( this.impossible() ) { 	this.completeCallback( false ); 	return false; 	}
+		if( this.solved() ) { this.completeCallback( true ); return true; }
+		if( this.impossible() ) { this.completeCallback( false ); return false; }
 		
 		// Do a backtracking algorithm (ie guess and discover if we're wrong by checking whether the resulting puzzle is impossible)
 		this.backtrack();
 		
-		if( this.solved() ) { 	this.completeCallback( true ); return true; }
+		if( this.solved() ) { this.completeCallback( true ); return true; }
 		// We should never get to here without an impossible sudoku
 		this.completeCallback( false ); 	return false;
 	},
@@ -203,7 +202,7 @@ Sudoku.prototype = {
 		while( i-- ) {
 			j = 9;
 			while( j-- ) {
-				if( this.output[i][j] === null ) { return false; 	}
+				if( this.output[i][j] === null ) { return false; }
 			}
 		}
 		return true;
