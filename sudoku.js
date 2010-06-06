@@ -44,12 +44,14 @@ Sudoku.prototype = {
 	initialise: function() {
 		var i = 9, j, k, valueIJ;
 		// Initialise this.tf with 'true' values, this.output with 'null' values
-		this.output = this.tf = [];
+		this.output = new Array( 9 );
+		this.tf = new Array( 9 );
 		while( i-- ) {
-			this.tf[i] = this.output[i] = [];
+			this.tf[i] = new Array( 9 );
+			this.output[i] = new Array( 9 );
 			j = 9;
 			while( j-- ) {
-				this.tf[i][j] = [];
+				this.tf[i][j] = new Array( 9 );
 				this.output[i][j] = null;
 				k = 9;
 				while( k-- ) {
